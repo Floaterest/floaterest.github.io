@@ -8,8 +8,9 @@
     "start": "sirv public --no-clear",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
+  "license": "MIT",
   "devDependencies": {
-    "@floaterest/svelte-nav": "^0.0.0",
+    "@floaterest/svelte": "^0.0.0",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-typescript": "^8.0.0",

@@ -1,7 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@floaterest/svelte-nav': ^0.0.0
+  '@floaterest/svelte': ^0.0.0
   '@rollup/plugin-commonjs': ^17.0.0
   '@rollup/plugin-node-resolve': ^11.0.0
   '@rollup/plugin-typescript': ^8.0.0
@@ -23,7 +23,7 @@ dependencies:
   sirv-cli: 1.0.14
 
 devDependencies:
-  '@floaterest/svelte-nav': 0.0.0
+  '@floaterest/svelte': 0.0.0
   '@rollup/plugin-commonjs': 17.1.0_rollup@2.56.2
   '@rollup/plugin-node-resolve': 11.2.1_rollup@2.56.2
   '@rollup/plugin-typescript': 8.2.5_5f9d52eb8f5b9c5f8da2582f59355eb7
@@ -63,8 +63,8 @@ packages:
       js-tokens: 4.0.0
     dev: true
 
-  /@floaterest/svelte-nav/0.0.0:
-    resolution: {integrity: sha512-7Sb+e9Eblrki2PUqYo6PGAKCfggveCM/eV4K1Izz3gfXE6X3TCTXHdHcdg231lnvUqFTUtZODmC9umlzxuLDgA==}
+  /@floaterest/svelte/0.0.0:
+    resolution: {integrity: sha512-gUtMOmLqJReXtzrQweczO0X9QZltUjzQGohCJvbydzncEjk0fXcTce29uTQGUetU1ypck0ooblI3B45R+Nf0fQ==}
     dev: true
 
   /@polka/url/1.0.0-next.17:
