@@ -39,5 +39,5 @@ jobs:
           git checkout -b ${{ env.output-branch }}
           git add .
           git commit -m "${{ env.commit-message }}"
-          git push -u origin github-pages -f
+          git push -u origin ${{ env.output-branch }} -f
 
