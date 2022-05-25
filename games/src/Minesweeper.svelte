@@ -2,9 +2,9 @@
 	import { Minefield, Tile, totile } from './minefield';
 	import { Queue } from './queue';
 
-	export let width = 10;
-	export let height = 10;
-	export let density = 10;
+	export let width;
+	export let height;
+	export let density;
 
 	let f = new Minefield(width, height, density);
 	const row = [...Array(height)];
@@ -60,7 +60,7 @@
 </svelte:head>
 
 <div id="field">
-    {#each ((i) => row.map(_ => col.map(_ => ({i, ...totile(f.field[i++])}))))(0) as r}
+    {#each (i => row.map(_ => col.map(_ => ({i, ...totile(f.field[i++])}))))(0) as r}
         <div class="row">
             {#each r as {opened, flagged, empty, adjacent, mine, i}}
                 <code class="tile" on:click={()=>open(i)}
