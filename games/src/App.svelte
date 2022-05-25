@@ -1,19 +1,52 @@
 <script lang="ts">
-	import '../node_modules/@floaterest/svelte/src/theme.css';
+	import { Nav } from '@floaterest/sv';
+	import Games from './Games.svelte';
+	import Minesweeper from './Minesweeper.svelte';
 
-	export let name: string;
+	import '../node_modules/@floaterest/sv/src/monokai.css';
+	import '../node_modules/@floaterest/sv/src/icons.css';
+
+
+	const material = (id: string) => `<span class="material-icons">${id}</span>`;
+	const bootstrap = (id: string) => `<i class="bi bi-${id}"></i>`;
+
+	const top = {
+		key: 'Games',
+		icon: material('sports_esports'),
+		swap: true,
+		style: 'color: var(--accent)'
+	};
+	const items = [
+		{
+			key: 'Minesweeper',
+			icon: material('settings_applications')
+		},
+		{
+			key: 'Arithmetic',
+			icon: material('calculate')
+		},
+		{
+			key: 'Flip',
+			icon: material('flip')
+		},
+		{
+			key: 'GitHub',
+			icon: bootstrap('github'),
+			last: true,
+			href: 'https://github.com/Floaterest/'
+		}
+	];
+
+	const components = {
+		Games,
+		Minesweeper,
+	};
+	let selected = 'Games';
+	selected = 'Minesweeper';
+	$: component = components[selected];
 </script>
 
 <main>
-    <h1>Hello {name}!</h1>
-    <p>
-        Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn
-        how to build Svelte apps.
-    </p>
+    <Nav {top} {items} bind:selected/>
+    <svelte:component this="{component}"/>
 </main>
-
-<style>
-    main{
-        width: 100%;
-    }
-</style>
