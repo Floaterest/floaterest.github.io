@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { Minefield, Tile, totile } from './minefield';
+	import { Queue } from './queue';
 
 	export let width = 10;
 	export let height = 10;
 	export let density = 10;
 
-	const f = new Minefield(width, height, density);
+	let f = new Minefield(width, height, density);
 	const row = [...Array(height)];
 	const col = [...Array(width)];
 
@@ -16,35 +17,40 @@
 		if(!f.count) f.count = f.generate(at);
 
 		// bfs
-		const queue = [at];
-		let tile: number;
+		const queue = new Queue<number[]>([at]);
+		const v = new Set([at]);
+		let tile: number, q2: number[];
 		while(queue.length){
-			at = queue.shift()!;
-			tile = f.field[at];
-			// open tile
-			await new Promise(r => setTimeout(r, 100));
-			f.field[at] |= Tile.Opened;
-			// if touches mine
-			if(tile & Tile.Mine){
-				f.dead = true;
-				// open all tiles
-				return f.field.forEach((_, i) => f.field[i] |= Tile.Opened);
-			}
+			await new Promise(r => setTimeout(r, 5));
+			q2 = [];
+			for(at of queue.shift()!){
+				tile = f.field[at];
+				// open tile
+				f.field[at] |= Tile.Opened;
+				v.delete(at);
+				// if touches mine
+				if(tile & Tile.Mine){
+					f.dead = true;
+					// open all tiles
+					return f.field.forEach((_, i) => f.field[i] |= Tile.Opened);
+				}
 
-			// remove flag
-			f.field[at] &= ~Tile.Flagged;
-			// if all non-mine tiles are opened
-			if(!--f.count){
-				console.log('won');
-				return f.won = true;
+				// remove flag
+				f.field[at] &= ~Tile.Flagged;
+				// if all non-mine tiles are opened
+				if(!--f.count){
+					console.log('won');
+					return f.won = true;
+				}
+				// if no adjacent mines
+				if(tile & Tile.Empty){
+					for(const i of f.adjacent(at, (t, i) => !(v.has(i) || t & (Tile.Opened | Tile.Flagged)))){
+						q2.push(i);
+						v.add(i);
+					}
+				}
 			}
-			// if no adjacent mines
-			if(tile & Tile.Empty){
-				queue.push(...f.adjacent(
-					at,
-					(t, i) => !(queue.includes(i) || t & Tile.Opened || t & Tile.Flagged)
-				));
-			}
+			if(q2.length) queue.push(q2);
 		}
 	}
 
@@ -81,6 +87,7 @@
         user-select: none;
         width: var(--icon-size);
         height: var(--icon-size);
+        transition: background-color 750ms ease-out;
 
         display: flex;
         justify-content: center;
