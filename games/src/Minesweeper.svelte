@@ -60,9 +60,9 @@
 </svelte:head>
 
 <div id="field">
-    {#each (i => row.map(_ => col.map(_ => ({i, ...totile(f.field[i++])}))))(0) as r}
+    {#each (i => row.map(_ => col.map(_ => ({ i, ...totile(f.field[i++]) }))))(0) as r}
         <div class="row">
-            {#each r as {opened, flagged, empty, adjacent, mine, i}}
+            {#each r as { opened, flagged, empty, adjacent, mine, i }}
                 <code class="tile" on:click={()=>open(i)}
                       class:mine class:opened class:flagged>
                     {empty ? '' : adjacent}
