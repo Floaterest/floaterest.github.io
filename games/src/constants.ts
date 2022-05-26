@@ -8,6 +8,13 @@ export const config = {
 			width: 10,
 			height: 10,
 			density: 10,
+		},
+		Arithmetic: {
+			amin: 100,
+			amax: 1000,
+			bmin: 100,
+			bmax: 1000,
+			op: '+-*/',
 		}
 	}
 };
