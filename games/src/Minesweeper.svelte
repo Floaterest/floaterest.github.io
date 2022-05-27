@@ -73,6 +73,8 @@
 </div>
 
 <style lang="sass">
+    @use '../node_modules/@floaterest/sv/src/styles/icons'
+    @use '../node_modules/@floaterest/sv/src/styles/colors'
     #field
         border: var(--accent) 1px solid
         display: inline-flex
@@ -83,8 +85,8 @@
 
     .tile
         user-select: none
-        width: var(--icon-size)
-        height: var(--icon-size)
+        width: icons.$icon-size
+        height: icons.$icon-size
         transition: background-color 750ms ease-out
 
         display: flex
@@ -92,12 +94,10 @@
         align-items: center
 
         &.mine.opened
-            color: var(--red)
-            background-color: var(--red)
+            color: colors.$pink
+            background-color: colors.$pink
 
         &:not(.opened):not(.flagged)
             background-color: var(--accent)
             color: var(--accent)
-
-
 </style>
