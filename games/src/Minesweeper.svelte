@@ -72,35 +72,32 @@
     {/each}
 </div>
 
-<style lang="less">
-    #field{
-        border: var(--accent) 1px solid;
-        display: inline-flex;
-        flex-direction: column;
-    }
+<style lang="sass">
+    #field
+        border: var(--accent) 1px solid
+        display: inline-flex
+        flex-direction: column
 
-    .row{
-        display: inherit;
-    }
+    .row
+        display: inherit
 
-    .tile{
-        user-select: none;
-        width: var(--icon-size);
-        height: var(--icon-size);
-        transition: background-color 750ms ease-out;
+    .tile
+        user-select: none
+        width: var(--icon-size)
+        height: var(--icon-size)
+        transition: background-color 750ms ease-out
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        display: flex
+        justify-content: center
+        align-items: center
 
-        &.mine.opened{
-            color: var(--red);
-            background-color: var(--red);
-        }
+        &.mine.opened
+            color: var(--red)
+            background-color: var(--red)
 
-        &:not(.opened):not(.flagged){
-            background-color: var(--accent);
-            color: var(--accent);
-        }
-    }
+        &:not(.opened):not(.flagged)
+            background-color: var(--accent)
+            color: var(--accent)
+
+
 </style>

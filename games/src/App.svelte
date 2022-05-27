@@ -5,10 +5,6 @@
 	import Minesweeper from './Minesweeper.svelte';
 	import Games from './Games.svelte';
 
-	import '../node_modules/@floaterest/sv/src/monokai.css';
-	import '../node_modules/@floaterest/sv/src/icons.css';
-
-
 	const components = {
 		Minesweeper,
 		Games,
@@ -28,9 +24,14 @@
 			return JSON.parse(localStorage.getItem(config.key))[selected];
 		}
 	}
+
+	console.log(navs);
 </script>
 
-<main>
-    <Nav {...navs} bind:selected/>
-    <svelte:component {...props(selected)} this="{components[selected]}"/>
-</main>
+<Nav {...navs} bind:selected/>
+<svelte:component {...props(selected)} this="{components[selected]}"/>
+
+<style lang="sass">
+    @use '../node_modules/@floaterest/sv/src/styles/icons'
+    @use '../node_modules/@floaterest/sv/src/styles/html'
+</style>
