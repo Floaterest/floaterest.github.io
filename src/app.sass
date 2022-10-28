@@ -1,0 +1,40 @@
+@use 'vars' as *
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons+Round'
+@import 'https://fonts.googleapis.com/css2?family=Roboto'
+@import 'https://floaterest.github.io/fonts/iosevka.css'
+
+body
+    background: $black
+    color: $white
+    font-family: Roboto, sans-serif
+    font-size: 32px
+code
+    font-family: $mono
+
+// override firefox styles
+*:focus
+    outline: 0
+input
+    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button
+        -webkit-appearance: none
+        margin: 0
+    &[type=number]
+        -moz-appearance: textfield
+    &::placeholder
+        font-family: Roboto, sans-serif
+    font-size: inherit
+    border: unset
+    font-family: unset
+    background: unset
+    color: unset
+
+button
+    font-family: unset
+    font-size: unset
+    color: unset
+    border: none
+    cursor: pointer
+
+.material-icons-round
+    font-size: 1.2em
+    user-select: none
