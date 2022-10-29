@@ -1,16 +1,29 @@
 <script lang="ts">
-    import Cube from './lib/Cube.svelte';
+
+    async function get(){
+        const res = await fetch('https://api.github.com/users/floaterest/repos');
+        const json = await res.json();
+        if(res.ok){
+            return json;
+        }else{
+            throw new Error(json);
+        }
+    }
 </script>
 
 <main>
-    <Cube/>
+    {#await get()}
+        waiting
+    {:then json}
+        <ul>
+            {#each json as { name, description }}
+                <li>{name}: {description}</li>
+            {/each}
+        </ul>
+    {:catch err}
+        {err.message}
+    {/await}
 </main>
 
 <style lang="sass">
-    main
-        font-size: 3em
-        display: flex
-        justify-content: center
-        align-items: center
-        height: 100vh
 </style>
