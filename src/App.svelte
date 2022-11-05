@@ -4,7 +4,7 @@
         const res = await fetch('https://api.github.com/users/floaterest/repos');
         const json = await res.json();
         if(res.ok){
-            return json;
+            return json.sort(({ pushed_at: lhs }, { pushed_at: rhs }) => lhs < rhs);
         }else{
             throw new Error(json);
         }
