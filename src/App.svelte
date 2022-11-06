@@ -1,12 +1,15 @@
 <script lang="ts">
+    import type { Repo } from './lib/repo';
+
+    const url = 'https://api.github.com/users/floaterest/repos';
 
     async function get(){
-        const res = await fetch('https://api.github.com/users/floaterest/repos');
-        const json = await res.json();
+        const res = await fetch(url);
+        const repos: Repo[] = await res.json();
         if(res.ok){
-            return json.sort(({ pushed_at: lhs }, { pushed_at: rhs }) => lhs < rhs);
+            return repos.sort((a, b) => Number(a.pushed_at < b.pushed_at));
         }else{
-            throw new Error(json);
+            throw new Error(JSON.stringify(repos));
         }
     }
 </script>
