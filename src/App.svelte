@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { Repo } from './lib/repo';
+    import LayoutGrid, { Cell } from '@smui/layout-grid';
 
     const url = 'https://api.github.com/users/floaterest/repos';
 
@@ -18,11 +19,14 @@
     {#await get()}
         waiting
     {:then json}
-        <ul>
+        <LayoutGrid>
             {#each json as { name, description }}
-                <li>{name}: {description}</li>
+                <Cell class="mdc-elevation--z24">
+                    <div>{name}</div>
+                    <div>{description}</div>
+                </Cell>
             {/each}
-        </ul>
+        </LayoutGrid>
     {:catch err}
         {err.message}
     {/await}
