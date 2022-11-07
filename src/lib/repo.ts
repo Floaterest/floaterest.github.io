@@ -7,4 +7,5 @@ export interface Repo{
     description: string,
     pushed_at: string,
     language: string,
+    homepage: string,
 }
