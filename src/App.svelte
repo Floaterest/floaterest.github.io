@@ -1,11 +1,12 @@
 <script lang="ts">
-    import type { Repo } from './lib/repo'
+    import type { Repo } from './lib/repo';
     import Repository from './lib/Repository.svelte';
     import LayoutGrid from '@smui/layout-grid';
 
-    const url = 'https://api.github.com/users/floaterest/repos';
+    export let user: string;
+    const url = `https://api.github.com/users/${user}/repos`;
 
-    async function get(){
+    async function api(){
         const res = await fetch(url);
         const repos: Repo[] = await res.json();
         if(res.ok){
@@ -17,7 +18,7 @@
 </script>
 
 <main>
-    {#await get()}
+    {#await api()}
         waiting
     {:then repos}
         <LayoutGrid>
