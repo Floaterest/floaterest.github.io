@@ -1,7 +1,7 @@
 @use 'sass:color'
 @use './colors' as *
 @use '@material/theme/color-palette'
-@use '@material/theme/index' as theme with ($primary: #ff3e00, $secondary: color.scale(#676778, $whiteness: -10%), $surface: $darkest, $background: $darkest, $error: color-palette.$red-700 )
+@use '@material/theme/index' as theme with ($primary: #ff3e00, $secondary: red, $surface: $darkest, $background: $darkest, $error: color-palette.$red-700 )
 @import '@material/elevation/mdc-elevation'
 
 html
@@ -9,10 +9,10 @@ html
     color: theme.$on-surface
 
 a
-    color: #40b3ff
-
-a:visited
-    color: color.scale(#40b3ff, $lightness: -35%)
+    color: $yellow
+    text-decoration: none
+    &:hover
+        text-decoration: underline
 
 body
     font-family: Roboto, sans-serif
