@@ -8,14 +8,15 @@
         html_url: href, homepage
     } = repo;
     const [user, name] = full_name.split('/');
+    const target = '_blank';
 </script>
 
 
 <Cell class="mdc-elevation--z24">
     <div class="links">
-        <a {href} target="_blank"><span class="user">{user}/</span>{name}</a>
+        <a {href} {target}><span class="user">{user}/</span>{name}</a>
         {#if homepage}
-            <a href={homepage} class="material-icons-round">launch</a>
+            <a href={homepage} {target} class="material-icons-round">launch</a>
         {/if}
     </div>
     <div>{description}</div>
