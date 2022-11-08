@@ -1,7 +1,8 @@
 @use 'sass:color'
 @use './colors' as *
 @use '@material/theme/color-palette'
-@use '@material/theme/index' as theme with ($primary: #ff3e00, $secondary: red, $surface: $darkest, $background: $darkest, $error: color-palette.$red-700 )
+@use '@material/theme' as theme with ($primary: #ff3e00, $secondary: red, $surface: $darkest, $background: $darkest, $error: color-palette.$red-700 )
+@use '@material/typography' as typo
 
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons+Round'
 @import 'https://fonts.googleapis.com/css2?family=Roboto'
@@ -12,17 +13,19 @@ html
     background-color: theme.$surface
     color: theme.$on-surface
 
+body
+    // Roboto
+    font-family: typo.$font-family
+    font-size: 32px
+
+code
+    font-family: 'Iosevka Web', monospace
+
 a
     color: $yellow
     text-decoration: none
     &:hover
         text-decoration: underline
-
-body
-    font-family: Roboto, sans-serif
-    font-size: 32px
-code
-    font-family: 'Iosevka Web', monospace
 
 // override firefox styles
 *:focus
