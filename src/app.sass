@@ -4,16 +4,14 @@
 @use '@material/theme' as theme with ($primary: #ff3e00, $secondary: red, $surface: $darkest, $background: $darkest, $error: color-palette.$red-700 )
 @use '@material/typography' as typo
 
+@import '@material/elevation/mdc-elevation'
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons+Round'
 @import 'https://fonts.googleapis.com/css2?family=Roboto'
 @import 'https://floaterest.github.io/fonts/iosevka.css'
-@import '@material/elevation/mdc-elevation'
 
 html
     background-color: theme.$surface
     color: theme.$on-surface
-
-body
     // Roboto
     font-family: typo.$font-family
     font-size: 32px
@@ -26,31 +24,3 @@ a
     text-decoration: none
     &:hover
         text-decoration: underline
-
-// override firefox styles
-*:focus
-    outline: 0
-input
-    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button
-        -webkit-appearance: none
-        margin: 0
-    &[type=number]
-        -moz-appearance: textfield
-    &::placeholder
-        font-family: Roboto, sans-serif
-    font-size: inherit
-    border: unset
-    font-family: unset
-    background: unset
-    color: unset
-
-button
-    font-family: unset
-    font-size: unset
-    color: unset
-    border: none
-    cursor: pointer
-
-.material-icons-round
-    font-size: 1.2em
-    user-select: none
