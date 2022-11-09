@@ -9,6 +9,7 @@
     } = repo;
     const [user, name] = full_name.split('/');
     const target = '_blank';
+    const title = 'Homepage';
 </script>
 
 
@@ -16,7 +17,7 @@
     <div class="links">
         <a {href} {target}><span class="user">{user}/</span>{name}</a>
         {#if homepage}
-            <a href={homepage} {target} class="material-icons-round">launch</a>
+            <a href={homepage} {title} {target} class="material-icons-round">launch</a>
         {/if}
     </div>
     <div>{description}</div>
