@@ -13,6 +13,7 @@ specifiers:
   svelte-preprocess: ^4.10.7
   tslib: ^2.4.0
   typescript: ^4.8.4
+  typescript-svelte-plugin: ^0.3.10
   vite: ^3.1.8
 
 devDependencies:
@@ -28,6 +29,7 @@ devDependencies:
   svelte-preprocess: 4.10.7_q7oepo4r57y5enzswpidbbgzsy
   tslib: 2.4.0
   typescript: 4.8.4
+  typescript-svelte-plugin: 0.3.10_besnmoibwkhwtentvwuriss7pa
   vite: 3.1.8_sass@1.55.0
 
 packages:
@@ -1038,6 +1040,16 @@ packages:
 
   /tslib/2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
+    dev: true
+
+  /typescript-svelte-plugin/0.3.10_besnmoibwkhwtentvwuriss7pa:
+    resolution: {integrity: sha512-4ZhJm/u5A3sRpml1jDMgeox3vtyP4qzdjmaxFyjSZ8lHJJJ6jLjLVTtJMQdmtjsQG74KYMT/DbfpT7BchkFa7g==}
+    dependencies:
+      sourcemap-codec: 1.4.8
+      svelte2tsx: 0.5.20_besnmoibwkhwtentvwuriss7pa
+    transitivePeerDependencies:
+      - svelte
+      - typescript
     dev: true
 
   /typescript/4.8.4:
