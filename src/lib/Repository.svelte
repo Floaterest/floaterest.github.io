@@ -26,7 +26,7 @@
 <style lang="sass">
     @use '../colors' as *
     .user
-        color: $dark
+        color: var(--dark)
     .links
         display: flex
         width: 100%
