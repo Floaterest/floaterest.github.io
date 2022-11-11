@@ -24,7 +24,6 @@
 </Cell>
 
 <style lang="sass">
-    @use '../colors' as *
     .user
         color: var(--dark)
     .links
