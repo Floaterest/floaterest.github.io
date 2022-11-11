@@ -1,3 +1,6 @@
+# CSS files to be complied and hosted
+**/*.css
+
 # Logs
 logs
 *.log
