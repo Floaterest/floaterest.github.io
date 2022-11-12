@@ -42,7 +42,6 @@
 </main>
 
 <style lang="sass">
-    @use './colors' as *
     .err
-        color: $pink
+        color: var(--pink)
 </style>
