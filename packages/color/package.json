@@ -1,10 +1,7 @@
 {
   "name": "@floaterest/color",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Floaterest's colors",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "floaterest",
   "license": "GPL-3.0"
 }
