@@ -42,6 +42,7 @@
 </main>
 
 <style lang="sass">
+    @use '@floaterest/color' as *
     .err
-        color: var(--pink)
+        color: $pink
 </style>
