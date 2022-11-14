@@ -24,8 +24,9 @@
 </Cell>
 
 <style lang="sass">
+    @use '@floaterest/color' as *
     .user
-        color: var(--dark)
+        color: $dark
     .links
         display: flex
         width: 100%

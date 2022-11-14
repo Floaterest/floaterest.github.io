@@ -22,10 +22,10 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
       # build sass files to css for hosting
-      - run: pnpm exec sass --no-source-map --style compressed src:public
+      # - run: pnpm exec sass --no-source-map --style compressed src:public
       - run: pnpm run build
       - uses: actions/upload-pages-artifact@v1
-        with: { path: dist }
+        with: { path: app/dist }
   # https://github.com/actions/deploy-pages#usage
   deploy:
     needs: build
