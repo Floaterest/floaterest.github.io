@@ -1,0 +1,110 @@
+[buildPlans.template]
+family = "template"
+spacing = "fontconfig-mono"
+serifs = "sans"
+no-cv-ss = true
+
+[buildPlans.template.widths.normal]
+shape = 500
+menu = 5
+css = "normal"
+
+[buildPlans.template.variants.design]
+capital-b = "standard-interrupted-serifless"
+capital-g = "toothless-corner-serifless-hooked"
+capital-j = "serifed-both-sides"
+capital-p = "open"
+capital-q = "crossing"
+capital-r = "straight-open"
+capital-u = "toothless-corner"
+a = "double-storey-toothless-corner"
+b = "toothless-corner"
+d = "toothless-corner-serifless"
+f = "flat-hook"
+g = "earless-corner"
+m = "earless-corner-double-arch"
+n = "earless-corner-straight"
+p = "earless-corner"
+q = "earless-corner"
+t = "flat-hook-short-neck"
+u = "toothless-corner"
+long-s = "bent-hook-tailed"
+one = "base"
+two = "straight-neck"
+three = "flat-top"
+four = "semi-open-non-crossing"
+seven = "straight-serifed"
+eight = "crossing-asymmetric"
+paren = "flat-arc"
+brace = "straight"
+ampersand = "upper-open"
+at = "fourfold"
+dollar = "interrupted-cap"
+lig-ltgteq = "slanted"
+
+[buildPlans.template.variants.italic]
+capital-b = "standard-serifless"
+capital-g = "toothless-corner-serifless-hookless"
+capital-j = "serifed"
+capital-k = "curly-serifless"
+capital-m = "slanted-sides-flat-bottom"
+capital-p = "closed"
+capital-q = "horizontal-tailed"
+capital-r = "curly"
+capital-u = "toothless-rounded"
+capital-v = "curly"
+capital-w = "curly"
+capital-x = "curly-serifless"
+capital-y = "curly-serifless"
+capital-z = "curly-serifless"
+a = "single-storey-earless-corner-tailed"
+b = "toothless-rounded"
+d = "toothless-rounded-serifless"
+f = "tailed"
+p = "earless-rounded"
+q = "earless-rounded"
+r = "earless-corner"
+u = "toothless-rounded"
+v = "curly"
+w = "curly"
+x = "curly-serifless"
+z = "curly-serifless"
+one = "no-base"
+two = "curly-neck"
+three = "two-arcs"
+four = "semi-open"
+five = "oblique-upper-left-bar"
+six = "open-contour"
+seven = "bend-serifed"
+nine = "open-contour"
+paren = "normal"
+
+[buildPlans.template.slopes.upright]
+angle = 0
+shape = "upright"
+menu = "upright"
+css = "normal"
+
+[buildPlans.template.slopes.italic]
+angle = 9.4
+shape = "italic"
+menu = "italic"
+css = "italic"
+
+[buildPlans.template.ligations]
+enables = [
+    "arrow", "arrow2",
+    "trig",
+    "eqeqeq", "eqeq", "ineq", "exeqeq", "exeq",
+    "ltgt-diamond-tag", "ltgt-slash-tag",
+    "plusplus",
+    "kern-dotty", "kern-bars",
+    "logic",
+    "llgg", "llggeq",
+    "dot-as-operator",
+    "html-comment",
+    "brace-bar", "brack-bar",
+    "connected-underscore",
+    "connected-number-sign",
+    "connected-hyphen-as-semi-dashed-line",
+]
