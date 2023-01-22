@@ -1,0 +1,11 @@
+{
+  "name": "@floaterest/iosevka",
+  "version": "1.0.0",
+  "description": "Floaterest's Iosevka font",
+  "author": "floaterest",
+  "files": [
+    "*.css",
+    "**/*.woff2"
+  ],
+  "license": "OFL-1.1"
+}
