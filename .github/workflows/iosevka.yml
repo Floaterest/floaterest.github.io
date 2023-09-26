@@ -5,15 +5,16 @@ on:
   # schedule: [{cron: "0 0 1 * *"}]
   push:
     paths:
-      - 'packages/font/**'
+      - 'packages/iosevka/**'
       - '.github/workflows/iosevka.yml'
+    branches-ignore: [ main ]
   workflow_dispatch:
 
 env:
-  template: packages/font/template.toml
-  iosevka: packages/font/Iosevka
-  dist: packages/font/Iosevka/dist
-  cwd: packages/font
+  template: packages/iosevka/template.toml
+  iosevka: packages/iosevka/Iosevka
+  dist: packages/iosevka/Iosevka/dist
+  cwd: packages/iosevka
 
 
 jobs:
