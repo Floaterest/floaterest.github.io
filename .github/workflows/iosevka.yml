@@ -33,7 +33,7 @@ jobs:
         with:
           path: ${{ env.iosevka }}
           key: ${{ matrix.plan }}-${{ hashFiles(env.template) }}
-
+      - run: tree -L3 -I node_modules
       - name: Generate build plans
         if: steps.cache.outputs.cache-hit != 'true'
         run: ${{ env.cwd }}/iosevka.sh ${{ env.template }}
