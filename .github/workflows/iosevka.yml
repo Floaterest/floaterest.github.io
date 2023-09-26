@@ -6,7 +6,7 @@ on:
   push:
     paths:
       - 'packages/font/**'
-      - '.github/workflows/font.yml'
+      - '.github/workflows/iosevka.yml'
   workflow_dispatch:
 
 env:
