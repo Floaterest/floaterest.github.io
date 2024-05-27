@@ -50,7 +50,7 @@ jobs:
       - name: Delete Oblique/Condensed
         run: find \( -name '*Oblique*' -or -name '*Condensed*' \) -delete
 
-      - run: tree ${{ env.dist }}/${{ matrix.plan }}/TTF
+      - run: tree ${{ env.dist }}/${{ matrix.plan }}
 
       - name: Upload TTF
         uses: actions/upload-artifact@v2
@@ -58,13 +58,13 @@ jobs:
           name: ${{ matrix.plan }}-ttf
           path: ${{ env.dist }}/${{ matrix.plan }}/TTF/*
 
-      - name: Upload WOFF2
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ matrix.plan }}-woff2
-          path: |
-            ${{ env.dist }}/${{ matrix.plan }}/${{ matrix.plan }}.css
-            ${{ env.dist }}/${{ matrix.plan }}/woff2/*
+      # - name: Upload WOFF2
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: ${{ matrix.plan }}-woff2
+      #     path: |
+      #       ${{ env.dist }}/${{ matrix.plan }}/${{ matrix.plan }}.css
+      #       ${{ env.dist }}/${{ matrix.plan }}/woff2/*
 
   patch-iosevka:
     name: Patch Nerd Font
@@ -100,7 +100,7 @@ jobs:
       - name: List files
         run: tree -I nerd-fonts
 
-      - name: Upload WOFF2 NF artifacts
+      - name: Upload TTF NF artifacts
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.plan }}-ttf-nf
