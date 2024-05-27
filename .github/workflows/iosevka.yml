@@ -27,42 +27,36 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Cache Iosevka
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.iosevka }}
-          key: ${{ matrix.plan }}-${{ hashFiles(env.template) }}
       - run: tree -L 3 -I node_modules
       - name: Generate build plans
-        if: steps.cache.outputs.cache-hit != 'true'
         run: ${{ env.cwd }}/iosevka.sh ${{ env.template }}
 
       - uses: awalsh128/cache-apt-pkgs-action@latest
-        if: steps.cache.outputs.cache-hit != 'true'
         with: { packages: ttfautohint, version: 1.0 }
 
       - name: Clone Iosevka and copy build plans
-        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           git clone https://github.com/be5invis/Iosevka.git ${{ env.iosevka }} --depth 1
           cp ${{ env.cwd }}/${{ matrix.plan }}.toml ${{ env.iosevka }}/private-build-plans.toml
 
-      - uses: actions/setup-node@v3
-        if: steps.cache.outputs.cache-hit != 'true'
-        with: { node-version: 'latest' }
+
+      - uses: oven-sh/setup-bun@v1
 
       - name: Build ${{ matrix.plan }}
-        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           cd ${{ env.iosevka }}
-          npm ci && npm run build -- contents::${{ matrix.plan }}
+          bun install && bun run build -- ttf::${{ matrix.plan }}
+      
+      - name: Delete Oblique/Condensed
+        run: find \( -name '*Oblique*' -or -name '*Condensed*' \) -delete
+
+      - run: tree ${{ env.dist }}/${{ matrix.plan }}/TTF
 
       - name: Upload TTF
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.plan }}-ttf
-          path: ${{ env.dist }}/${{ matrix.plan }}/ttf/*
+          path: ${{ env.dist }}/${{ matrix.plan }}/TTF/*
 
       - name: Upload WOFF2
         uses: actions/upload-artifact@v2
@@ -72,70 +66,42 @@ jobs:
             ${{ env.dist }}/${{ matrix.plan }}/${{ matrix.plan }}.css
             ${{ env.dist }}/${{ matrix.plan }}/woff2/*
 
-  publish:
-    name: Publish Fonts
-    needs: build
+  patch-iosevka:
+    name: Patch Nerd Font
+    needs: [ build ]
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        plan: [iosevka, iosevka-extended]
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v3
+
+      - name: Download ${{ matrix.plan }} TTF
+        uses: actions/download-artifact@v2
         with:
-          name: iosevka-woff2
-          path: ${{ env.iosevka }}
+          name: ${{ matrix.plan }}-ttf
+          path: ${{ matrix.plan }}-ttf
 
-      - uses: actions/download-artifact@v3
+      - uses: awalsh128/cache-apt-pkgs-action@latest
+        with: { packages: fontforge python3-fontforge }
+      - name: Download font patcher
+        run: |
+          curl -LO https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FontPatcher.zip
+          unzip -n FontPatcher.zip
+
+      - name: Patch nerd fonts
+        run: find ${{ matrix.plan }}-ttf -name '*.ttf' -exec fontforge -script ./font-patcher {} -c -q -out ${{ matrix.plan }}-ttf-nf \;
+  
+      - run: tree -I nerd-fonts
+
+      - name: Change font names
+        run: fontforge -script ${{ env.cwd }}/unrename.py ${{ matrix.plan }}-ttf-nf ttf-nf > /dev/null
+
+      - name: List files
+        run: tree -I nerd-fonts
+
+      - name: Upload WOFF2 NF artifacts
+        uses: actions/upload-artifact@v2
         with:
-          name: iosevka-extended-woff2
-          path: ${{ env.iosevka }}
-
-      - name: No TTF Fonts
-        run: perl -i -pe "s/url\('ttf\/.+,\s*//g" ${{ env.iosevka }}/*.css
-
-      - run: tree ${{ env.iosevka }}
-
-      - uses: actions/upload-artifact@v2
-        name: fonts
-        with:
-          path: ${{ env.iosevka }}
-
-  # deploy:
-  #   needs: upload
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     pages: write
-  #     id-token: write
-  #   environment:
-  #     name: github-pages
-  #     url: ${{ steps.deployment.outputs.page_url }}
-  #   steps:
-  #     - name: Deploy to GitHub Pages
-  #       id: deployment
-  #       uses: actions/deploy-pages@v1
-
-  # patch-iosevka:
-  #   name: Patch Nerd Font
-  #   needs: [ build-iosevka ]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-
-  #     - name: Download Iosevka TTF
-  #       uses: actions/download-artifact@v2
-  #       with:
-  #         name: iosevka-ttf
-  #         path: ttf
-
-  #     - name: Patch nerd fonts
-  #       run: make nerd
-
-  #     - name: Change font names
-  #       run: make unrename
-
-  #     - name: List files
-  #       run: tree -I nerd-fonts
-
-  #     - name: Upload TTF NF artifacts
-  #       uses: actions/upload-artifact@v2
-  #       with:
-  #         name: iosevka-ttf-nf
-  #         path: ttf-nf/*
+          name: ${{ matrix.plan }}-ttf-nf
+          path: ttf-nf/*
