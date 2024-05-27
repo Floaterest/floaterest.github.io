@@ -47,8 +47,8 @@ jobs:
           cd ${{ env.iosevka }}
           bun install && bun run build -- ttf::${{ matrix.plan }}
       
-      - name: Delete Oblique/Condensed
-        run: find \( -name '*Oblique*' -or -name '*Condensed*' \) -delete
+      # - name: Delete Oblique/Condensed
+      #   run: find \( -name '*Oblique*' -or -name '*Condensed*' \) -delete
 
       - run: tree ${{ env.dist }}/${{ matrix.plan }}
 
@@ -92,13 +92,13 @@ jobs:
       - name: Patch nerd fonts
         run: find ${{ matrix.plan }}-ttf -name '*.ttf' -exec fontforge -script ./font-patcher {} -c -q -out ${{ matrix.plan }}-ttf-nf \;
   
-      - run: tree -I nerd-fonts
+      - run: tree ${{ matrix.plan }}-ttf-nf
 
       - name: Change font names
         run: fontforge -script ${{ env.cwd }}/unrename.py ${{ matrix.plan }}-ttf-nf ttf-nf > /dev/null
 
       - name: List files
-        run: tree -I nerd-fonts
+        run: tree ${{ matrix.plan }}-ttf-nf
 
       - name: Upload TTF NF artifacts
         uses: actions/upload-artifact@v2
