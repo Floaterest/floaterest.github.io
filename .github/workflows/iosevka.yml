@@ -45,7 +45,7 @@ jobs:
       - name: Build ${{ matrix.plan }}
         run: |
           cd ${{ env.iosevka }}
-          bun install && bun run build -- ttf::${{ matrix.plan }}
+          bun install && bun run build -- contents::${{ matrix.plan }}
       
       # - name: Delete Oblique/Condensed
       #   run: find \( -name '*Oblique*' -or -name '*Condensed*' \) -delete
@@ -58,13 +58,13 @@ jobs:
           name: ${{ matrix.plan }}-ttf
           path: ${{ env.dist }}/${{ matrix.plan }}/TTF/*
 
-      # - name: Upload WOFF2
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: ${{ matrix.plan }}-woff2
-      #     path: |
-      #       ${{ env.dist }}/${{ matrix.plan }}/${{ matrix.plan }}.css
-      #       ${{ env.dist }}/${{ matrix.plan }}/woff2/*
+      - name: Upload WOFF2
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.plan }}-woff2
+          path: |
+            ${{ env.dist }}/${{ matrix.plan }}/${{ matrix.plan }}.css
+            ${{ env.dist }}/${{ matrix.plan }}/woff2/*
 
   patch-iosevka:
     name: Patch Nerd Font

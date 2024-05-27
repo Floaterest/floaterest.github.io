@@ -58,7 +58,8 @@ def new_sfnt(sfnt, family, font, full):
 
 def main(s: str, d: str):
     os.makedirs(d, exist_ok=True)
-    for file in os.listdir(s):
+    files = os.listdir(s)
+    for i, file in enumerate(files, 1):
         ext = os.path.splitext(file)[1]
         f = fontforge.open(os.path.join(s, file))
         f.familyname, f.fontname, f.fullname, fn = to_names(file)
@@ -68,7 +69,8 @@ def main(s: str, d: str):
             data[f.familyname].append([f.fontname, f.fullname, f.sfnt_names])
         else:
             data[f.familyname] = [[f.fontname, f.fullname, f.sfnt_names]]
-        print(p := os.path.join(d, f'{fn}{ext}'))
+        p = os.path.join(d, f'{fn}{ext}')
+        print(f'{i:02d}/{len(files)}: {p}')
         f.generate(p)
 
     with open(os.path.join(d, 'iosevka.json'),'w') as f:
