@@ -46,7 +46,7 @@ jobs:
         run: |
           cd ${{ env.iosevka }}
           bun install && bun run build -- contents::${{ matrix.plan }}
-      
+
       # - name: Delete Oblique/Condensed
       #   run: find \( -name '*Oblique*' -or -name '*Condensed*' \) -delete
 
@@ -68,7 +68,7 @@ jobs:
 
   patch-iosevka:
     name: Patch Nerd Font
-    needs: [ build ]
+    needs: build
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -91,11 +91,11 @@ jobs:
 
       - name: Patch nerd fonts
         run: find ${{ matrix.plan }}-ttf -name '*.ttf' -exec fontforge -script ./font-patcher {} -c -q -out ${{ matrix.plan }}-ttf-nf \;
-  
+
       - run: tree ${{ matrix.plan }}-ttf-nf
 
       - name: Change font names
-        run: fontforge -script ${{ env.cwd }}/unrename.py ${{ matrix.plan }}-ttf-nf ttf-nf > /dev/null
+        run: fontforge -script ${{ env.cwd }}/unrename.py ${{ matrix.plan }}-ttf-nf ttf-nf 2> /dev/null
 
       - name: List files
         run: tree ${{ matrix.plan }}-ttf-nf
