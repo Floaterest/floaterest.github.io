@@ -9,9 +9,7 @@ import fontforge
 weight = re.compile(r'(heavy|(extra|semi)bold|medium|thin)')
 light = re.compile(r'(extralight|light)')
 
-data = {}
-
-def to_names(filename: str) -> (str, str, str, str):
+def to_names(filename: str) -> tuple[str, str, str, str]:
     """
     generate names from font's filename
     :return: fontfamily, fontname, fullname, filename
@@ -56,29 +54,26 @@ def new_sfnt(sfnt, family, font, full):
             res.append(name)
     return tuple(res)
 
-def main(s: str, d: str):
+def main(file: str, d: str):
     os.makedirs(d, exist_ok=True)
-    files = os.listdir(s)
-    for i, file in enumerate(files, 1):
-        ext = os.path.splitext(file)[1]
-        f = fontforge.open(os.path.join(s, file))
-        f.familyname, f.fontname, f.fullname, fn = to_names(file)
-        f.sfnt_names = new_sfnt(f.sfnt_names, f.familyname, f.fontname, f.fullname)
+    ext = os.path.splitext(file)[1]
+    f = fontforge.open(file)
+    f.familyname, f.fontname, f.fullname, fn = to_names(file)
+    f.sfnt_names = new_sfnt(f.sfnt_names, f.familyname, f.fontname, f.fullname)
 
-        if f.familyname in data:
-            data[f.familyname].append([f.fontname, f.fullname, f.sfnt_names])
-        else:
-            data[f.familyname] = [[f.fontname, f.fullname, f.sfnt_names]]
-        p = os.path.join(d, f'{fn}{ext}')
-        print(f'{i:02d}/{len(files)}: {p}')
-        f.generate(p)
+    # if f.familyname in data:
+    #     data[f.familyname].append([f.fontname, f.fullname, f.sfnt_names])
+    # else:
+    #     data[f.familyname] = [[f.fontname, f.fullname, f.sfnt_names]]
+    p = os.path.join(d, f'{fn}{ext}')
+    f.generate(p)
 
-    with open(os.path.join(d, 'iosevka.json'),'w') as f:
-        json.dump(data, f, indent=4)
+    # with open(os.path.join(d, 'iosevka.json'),'w') as f:
+    #     json.dump(data, f, indent=4)
 
 if __name__ == '__main__':
     parser = ArgumentParser()
-    parser.add_argument('src', help='source directory')
+    parser.add_argument('file', help='source font file')
     parser.add_argument('dest', help='destination directory')
     args = parser.parse_args()
-    main(args.src, args.dest)
+    main(args.file, args.dest)

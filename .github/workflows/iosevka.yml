@@ -95,10 +95,11 @@ jobs:
       - run: tree ${{ matrix.plan }}-ttf-nf
 
       - name: Change font names
-        run: fontforge -script ${{ env.cwd }}/unrename.py ${{ matrix.plan }}-ttf-nf ttf-nf 2> /dev/null
+        # run: fontforge -script ${{ env.cwd }}/unrename.py ${{ matrix.plan }}-ttf-nf ttf-nf 2> /dev/null
+        run: find ${{ matrix.plan }}-ttf-nf -name '*.ttf' | xargs -It {} fontforge -script ${{ env.cwd }}/unrename.py {} ttf-nf 2> /dev/null
 
       - name: List files
-        run: tree ${{ matrix.plan }}-ttf-nf
+        run: tree ttf-nf
 
       - name: Upload TTF NF artifacts
         uses: actions/upload-artifact@v2
