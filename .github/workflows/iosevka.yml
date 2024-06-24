@@ -96,7 +96,7 @@ jobs:
 
       - name: Change font names
         # run: fontforge -script ${{ env.cwd }}/unrename.py ${{ matrix.plan }}-ttf-nf ttf-nf 2> /dev/null
-        run: find ${{ matrix.plan }}-ttf-nf -name '*.ttf' | xargs -It {} fontforge -script ${{ env.cwd }}/unrename.py {} ttf-nf
+        run: find ${{ matrix.plan }}-ttf-nf -name '*.ttf' | xargs -t -I {} fontforge -script ${{ env.cwd }}/unrename.py {} ttf-nf
 
       - name: List files
         run: tree ttf-nf
